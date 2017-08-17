@@ -5,12 +5,12 @@ namespace Cake.Bower
 {
     public class BowerInstallSettings : BowerRunnerSettings
     {
-        public BowerInstallSettings() : base((string) "install") { }
+        public BowerInstallSettings() : base("install") { }
 
         protected override void EvaluateCore(ProcessArgumentBuilder args)
         {
-            if (!string.IsNullOrWhiteSpace(Endpoint))
-                ProcessArgumentListExtensions.Append(args, Endpoint);
+            if (!string.IsNullOrWhiteSpace(Package))
+                args.Append(Package);
             if (Save)
                 args.Append("--save");
             if (SaveDev)
@@ -23,15 +23,9 @@ namespace Cake.Bower
                 args.Append("--production");
         }
 
-        /// <summary>
-        /// Sets the endpoint for the install command
-        /// Endpoints can have multiple forms as described at https://bower.io/docs/api/#install
-        /// </summary>
-        /// <param name="endpoint"></param>
-        /// <returns></returns>
-        public BowerInstallSettings WithEndpoint(string endpoint)
+        public BowerInstallSettings WithPackage(string package)
         {
-            Endpoint = endpoint;
+            Package = package;
             return this;
         }
 
@@ -46,24 +40,44 @@ namespace Cake.Bower
             return this;
         }
 
+        /// <summary>
+        /// Applies the --save-dev parameter
+        /// </summary>
+        /// <param name="enabled"></param>
+        /// <returns></returns>
         public BowerInstallSettings WithSaveDev(bool enabled = true)
         {
             SaveDev = enabled;
             return this;
         }
 
+        /// <summary>
+        /// Applies the --save-exact parameter
+        /// </summary>
+        /// <param name="enabled"></param>
+        /// <returns></returns>
         public BowerInstallSettings WithSaveExact(bool enabled = true)
         {
             SaveExact = enabled;
             return this;
         }
 
+        /// <summary>
+        /// Applies the --force-latest parameter
+        /// </summary>
+        /// <param name="enabled"></param>
+        /// <returns></returns>
         public BowerInstallSettings WithForce(bool enabled = true)
         {
             Force = enabled;
             return this;
         }
 
+        /// <summary>
+        /// Applies the --production parameter
+        /// </summary>
+        /// <param name="enabled"></param>
+        /// <returns></returns>
         public BowerInstallSettings ForProduction(bool enabled = true)
         {
             Production = enabled;
@@ -74,7 +88,7 @@ namespace Cake.Bower
         /// Package to install
         /// See https://bower.io/docs/api/#install for details on package format
         /// </summary>
-        public string Endpoint { get; internal set; }
+        public string Package { get; internal set; }
         /// <summary>
         /// Save installed packages into the project’s bower.json dependencies
         /// </summary>

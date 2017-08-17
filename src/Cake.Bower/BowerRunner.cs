@@ -1,16 +1,12 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
 using Cake.Core;
 using Cake.Core.IO;
 using Cake.Core.Tooling;
 
 namespace Cake.Bower
 {
-    public class BowerRunner : Tool<BowerRunnerSettings>, IBowerRunnerCommands, IBowerRunnerConfiguration
-    {
-        private readonly IFileSystem _fileSystem;
-        private DirectoryPath _workingDirectoryPath;
+    public class BowerRunner : Tool<BowerRunnerSettings>, IBowerRunnerCommands{
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BowerRunner" /> class.
@@ -20,17 +16,8 @@ namespace Cake.Bower
         /// <param name="processRunner">The process runner</param>
         /// <param name="toolLocator">The tool locator</param>
         public BowerRunner(IFileSystem fileSystem, ICakeEnvironment environment, IProcessRunner processRunner,
-            IToolLocator tools)
-            : base(fileSystem, environment, processRunner, tools)
-        {
-            _fileSystem = fileSystem;
-        }
-
-        public IBowerRunnerCommands FromPath(DirectoryPath path)
-        {
-            _workingDirectoryPath = path;
-            return this;
-        }
+            IToolLocator toolLocator)
+            : base(fileSystem, environment, processRunner, toolLocator) { }
 
         protected override string GetToolName() => "Bower Runner";
 
@@ -48,7 +35,7 @@ namespace Cake.Bower
         /// Task("Bower-FromPath")
         ///     .Does(() =>
         /// {
-        ///     Bower.FromPath("./dir-with-bowerjson").Install();
+        ///     Bower.Install(s => s.UseWorkingDirectory("./dir-with-bower.json/");
         /// });
         /// ]]>
         /// </code>
@@ -93,7 +80,7 @@ namespace Cake.Bower
         /// </example>
         public IBowerRunnerCommands Install(BowerInstallSettings settings)
         {
-            var args = GetBowerInstallArguments(settings);
+            var args = GetBowerSettingsArguments(settings);
             Run(settings, args);
             return this;
         }
@@ -101,7 +88,8 @@ namespace Cake.Bower
         /// <summary>
         /// execute 'bower install' for a particular package
         /// </summary>
-        /// <param name="endpoint">endpoint/package to install when using 'bower install'</param>
+        /// <param name="package">endpoint/package to install when using 'bower install'</param>
+        /// <param name="configure">options when running 'bower install'</param>
         /// <example>
         /// <para>Run 'bower install'</para>
         /// <code>
@@ -109,44 +97,103 @@ namespace Cake.Bower
         /// Task("Bower")
         ///     .Does(() =>
         /// {
-        ///     Bower.Install(settings));
+        ///     Bower.Install("jquery"));
         /// });
         /// ]]>
         /// </code>
         /// </example>
-        public IBowerRunnerCommands Install(string endpoint)
+        public IBowerRunnerCommands Install(string package, Action<BowerInstallSettings> configure = null)
         {
-            var settings = new BowerInstallSettings()
-                .WithEndpoint(endpoint);
+            var settings = new BowerInstallSettings();
+            settings.WithPackage(package);
+            configure?.Invoke(settings);
             return Install(settings);
         }
 
-        private static ProcessArgumentBuilder GetBowerInstallArguments(BowerInstallSettings settings)
+        /// <summary>
+        /// execute 'bower install' for a particular package
+        /// </summary>
+        /// <param name="package">endpoint/package to install when using 'bower install'</param>
+        /// <param name="settings">options when running 'bower install'</param>
+        /// <example>
+        /// <para>Run 'bower install'</para>
+        /// <code>
+        /// <![CDATA[
+        /// Task("Bower")
+        ///     .Does(() =>
+        /// {
+        ///     var settings = new BowerInstallSettings();
+        ///     settings.WithSave();
+        ///     Bower.Install("jquery", settings));
+        /// });
+        /// ]]>
+        /// </code>
+        /// </example>
+        public IBowerRunnerCommands Install(string package, BowerInstallSettings settings)
+        {
+            settings.WithPackage(package);
+            return Install(settings);
+        }
+        #endregion
+
+        #region cache
+        /// <summary>
+        /// execute 'bower cache' for a particular package
+        /// </summary>
+        /// <param name="configure">options when running 'bower install'</param>
+        /// <example>
+        /// <para>Run 'bower install'</para>
+        /// <code>
+        /// <![CDATA[
+        /// Task("Bower")
+        ///     .Does(() =>
+        /// {
+        ///     var settings = new BowerInstallSettings();
+        ///     settings.WithSave();
+        ///     Bower.Install("jquery", settings));
+        /// });
+        /// ]]>
+        /// </code>
+        /// </example>
+        public IBowerRunnerCommands Cache(Action<BowerCacheSettings> configure = null)
+        {
+            var settings = new BowerCacheSettings();
+            configure?.Invoke(settings);
+
+            return Cache(settings);
+        }
+
+        /// <summary>
+        /// execute 'bower cache' for a particular package
+        /// </summary>
+        /// <param name="settings">options when running 'bower install'</param>
+        /// <example>
+        /// <para>Run 'bower install'</para>
+        /// <code>
+        /// <![CDATA[
+        /// Task("Bower")
+        ///     .Does(() =>
+        /// {
+        ///     var settings = new BowerInstallSettings();
+        ///     settings.WithSave();
+        ///     Bower.Install("jquery", settings));
+        /// });
+        /// ]]>
+        /// </code>
+        /// </example>
+        public IBowerRunnerCommands Cache(BowerCacheSettings settings)
+        {
+            var args = GetBowerSettingsArguments(settings);
+            Run(settings, args);
+            return this;
+        }
+        #endregion
+
+        private static ProcessArgumentBuilder GetBowerSettingsArguments(BowerRunnerSettings settings)
         {
             var args = new ProcessArgumentBuilder();
             settings?.Evaluate(args);
             return args;
-        }
-#endregion
-
-        /// <summary>
-        /// Gets the working directory from the BowerRunnerSettings
-        ///             Defaults to the currently set working directory.
-        /// </summary>
-        /// <param name="settings">The settings.</param>
-        /// <returns>
-        /// The working directory for the tool.
-        /// </returns>
-        protected override DirectoryPath GetWorkingDirectory(BowerRunnerSettings settings)
-        {
-            if (_workingDirectoryPath == null)
-                return base.GetWorkingDirectory(settings);
-
-            if (!_fileSystem.Exist(_workingDirectoryPath))
-                throw new DirectoryNotFoundException(
-                    $"Working directory path not found [{_workingDirectoryPath.FullPath}]");
-
-            return _workingDirectoryPath;
         }
     }
 }

@@ -18,7 +18,7 @@ namespace Cake.Bower
 
         internal void Evaluate(ProcessArgumentBuilder args)
         {
-            ProcessArgumentListExtensions.Append(args, Command);
+            args.Append(Command);
             EvaluateCore(args);
         }
 
@@ -26,6 +26,8 @@ namespace Cake.Bower
         /// Evaluate options
         /// </summary>
         /// <param name="args"></param>
-        protected virtual void EvaluateCore(ProcessArgumentBuilder args) { }
+        protected virtual void EvaluateCore(ProcessArgumentBuilder args)
+        {
+        }
     }
 }
