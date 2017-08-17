@@ -69,7 +69,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\src\Cake.Bower\Cake.Bower.csproj">
+    <ProjectReference Include="..\Cake.Bower\Cake.Bower.csproj">
       <Project>{786C186A-82E7-451C-BBE0-D6050592A6E2}</Project>
       <Name>Cake.Bower</Name>
     </ProjectReference>
