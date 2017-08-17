@@ -36,7 +36,7 @@ namespace Cake.Bower
 
         protected override IEnumerable<string> GetToolExecutableNames() => new[] {"bower.cmd", "bower"};
 
-#region install
+        #region install
         /// <summary>
         /// execute 'bower install' with options
         /// </summary>
@@ -68,10 +68,57 @@ namespace Cake.Bower
             var settings = new BowerInstallSettings();
             configure?.Invoke(settings);
 
-            var args = GetBowerInstallArguments(settings);
+            return Install(settings);
+        }
 
+
+        /// <summary>
+        /// execute 'bower install' with options
+        /// </summary>
+        /// <param name="settings">options when running 'bower install'</param>
+        /// <example>
+        /// <para>Run 'bower install'</para>
+        /// <code>
+        /// <![CDATA[
+        /// Task("Bower")
+        ///     .Does(() =>
+        /// {
+        ///     var settings = new BowerInstallSettings()
+        ///         .WithSave()
+        ///         .ForProduction();
+        ///     Bower.Install(settings));
+        /// });
+        /// ]]>
+        /// </code>
+        /// </example>
+        public IBowerRunnerCommands Install(BowerInstallSettings settings)
+        {
+            var args = GetBowerInstallArguments(settings);
             Run(settings, args);
             return this;
+        }
+
+        /// <summary>
+        /// execute 'bower install' for a particular package
+        /// </summary>
+        /// <param name="endpoint">endpoint/package to install when using 'bower install'</param>
+        /// <example>
+        /// <para>Run 'bower install'</para>
+        /// <code>
+        /// <![CDATA[
+        /// Task("Bower")
+        ///     .Does(() =>
+        /// {
+        ///     Bower.Install(settings));
+        /// });
+        /// ]]>
+        /// </code>
+        /// </example>
+        public IBowerRunnerCommands Install(string endpoint)
+        {
+            var settings = new BowerInstallSettings()
+                .WithEndpoint(endpoint);
+            return Install(settings);
         }
 
         private static ProcessArgumentBuilder GetBowerInstallArguments(BowerInstallSettings settings)
