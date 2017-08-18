@@ -252,10 +252,12 @@ namespace Cake.Bower
         #endregion
 
         #region info
+
         /// <summary>
         /// execute 'bower info' for a particular package
         /// </summary>
         /// <param name="package"></param>
+        /// <param name="property"></param>
         /// <example>
         /// <para>Run 'bower info'</para>
         /// <code>
@@ -268,10 +270,53 @@ namespace Cake.Bower
         /// ]]>
         /// </code>
         /// </example>
-        public IBowerRunnerCommands Info(string package = null, string property = null)
+        public IBowerRunnerCommands Info(string package, string property = null)
+        {
+            return Info(s => s.ForPackage(package).ForProperty(property));
+        }
+
+        /// <summary>
+        /// execute 'bower info' for a particular package
+        /// </summary>
+        /// <example>
+        /// <param name="configure"></param>
+        /// <para>Run 'bower info'</para>
+        /// <code>
+        /// <![CDATA[
+        /// Task("Bower")
+        ///     .Does(() =>
+        /// {
+        ///     Bower.Info(s => s.ForPackage("jquery"));
+        /// });
+        /// ]]>
+        /// </code>
+        /// </example>
+        public IBowerRunnerCommands Info(Action<BowerInfoSettings> configure = null)
         {
             var settings = new BowerInfoSettings();
-            settings.ForPackage(package).ForProperty(property);
+            configure?.Invoke(settings);
+            return Info(settings);
+        }
+
+        /// <summary>
+        /// execute 'bower info' for a particular package
+        /// </summary>
+        /// <example>
+        /// <param name="settings"></param>
+        /// <para>Run 'bower info'</para>
+        /// <code>
+        /// <![CDATA[
+        /// Task("Bower")
+        ///     .Does(() =>
+        /// {
+        ///     var settings = new BowerInfoSettings().ForPackage("jquery");
+        ///     Bower.Info(settings);
+        /// });
+        /// ]]>
+        /// </code>
+        /// </example>
+        public IBowerRunnerCommands Info(BowerInfoSettings settings)
+        {
             var args = GetBowerSettingsArguments(settings);
             Run(settings, args);
             return this;

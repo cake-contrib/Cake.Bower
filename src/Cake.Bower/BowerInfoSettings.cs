@@ -14,15 +14,6 @@ namespace Cake.Bower
         public BowerInfoSettings() : base("info") { }
 
         /// <summary>
-        /// Bower info settings
-        /// </summary>
-        /// <param name="commandName"></param>
-        public BowerInfoSettings(string commandName) : base("info")
-        {
-            ForPackage(commandName);
-        }
-
-        /// <summary>
         /// Evaluate options
         /// </summary>
         /// <param name="args"></param>

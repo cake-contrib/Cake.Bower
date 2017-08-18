@@ -67,5 +67,19 @@ namespace Cake.Bower
         /// <param name="property"></param>
         /// <returns></returns>
         IBowerRunnerCommands Info(string package = null, string property = null);
+
+        /// <summary>
+        /// execute 'bower info'
+        /// </summary>
+        /// <param name="configure"></param>
+        /// <returns></returns>
+        IBowerRunnerCommands Info(Action<BowerInfoSettings> configure = null);
+
+        /// <summary>
+        /// execute 'bower info'
+        /// </summary>
+        /// <param name="settings"></param>
+        /// <returns></returns>
+        IBowerRunnerCommands Info(BowerInfoSettings settings);
     }
 }
