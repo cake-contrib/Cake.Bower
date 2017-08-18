@@ -69,6 +69,7 @@
     <Compile Include="BowerInfoTests.cs" />
     <Compile Include="BowerInstallFixture.cs" />
     <Compile Include="BowerInstallTests.cs" />
+    <Compile Include="BowerRunnerSettingsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

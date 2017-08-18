@@ -6,12 +6,7 @@ namespace Cake.Bower.Tests
     public class BowerInstallTests
     {
         private const string _testPackageName = "test-package-name";
-        private readonly BowerInstallFixture _fixture;
-
-        public BowerInstallTests()
-        {
-            _fixture = new BowerInstallFixture();
-        }
+        private readonly BowerInstallFixture _fixture = new BowerInstallFixture();
 
         private static string GetPackageString(string package) => string.IsNullOrWhiteSpace(package)
             ? null
@@ -88,7 +83,7 @@ namespace Cake.Bower.Tests
         public void Force_Should_Use_Correct_Argument_Provided_In_BowerInstallSettings(string package)
         {
             _fixture.Package = package;
-            _fixture.InstallSettings = s => s.WithForce();
+            _fixture.InstallSettings = s => s.WithForceLatest();
 
             var result = _fixture.Run();
 
@@ -103,7 +98,7 @@ namespace Cake.Bower.Tests
             _fixture.Package = package;
             _fixture.InstallSettings = s => s
                 .WithSaveDev()
-                .WithForce()
+                .WithForceLatest()
                 .WithSave()
                 .WithSaveExact()
                 .ForProduction();

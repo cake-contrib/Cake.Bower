@@ -50,6 +50,7 @@
     <Compile Include="BowerHomeSettings.cs" />
     <Compile Include="BowerInfoSettings.cs" />
     <Compile Include="BowerInstallSettings.cs" />
+    <Compile Include="BowerLogLevel.cs" />
     <Compile Include="BowerRunner.cs" />
     <Compile Include="BowerRunnerAliases.cs" />
     <Compile Include="BowerRunnerSettings.cs" />

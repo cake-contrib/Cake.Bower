@@ -27,10 +27,12 @@ namespace Cake.Bower
                 args.Append("--save-dev");
             if (SaveExact)
                 args.Append("--save-exact");
-            if (Force)
+            if (ForceLatest)
                 args.Append("--force-latest");
             if (Production)
                 args.Append("--production");
+
+            base.EvaluateCore(args);
         }
 
         /// <summary>
@@ -82,9 +84,9 @@ namespace Cake.Bower
         /// </summary>
         /// <param name="enabled"></param>
         /// <returns></returns>
-        public BowerInstallSettings WithForce(bool enabled = true)
+        public BowerInstallSettings WithForceLatest(bool enabled = true)
         {
-            Force = enabled;
+            ForceLatest = enabled;
             return this;
         }
 
@@ -119,7 +121,7 @@ namespace Cake.Bower
         /// <summary>
         /// Force latest version on conflict
         /// </summary>
-        public bool Force { get; internal set; }
+        public bool ForceLatest { get; internal set; }
         /// <summary>
         /// Do not install project devDependencies
         /// </summary>

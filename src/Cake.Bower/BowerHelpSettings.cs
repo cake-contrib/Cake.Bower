@@ -30,6 +30,8 @@ namespace Cake.Bower
         {
             if (!string.IsNullOrWhiteSpace(CommandName))
                 args.Append(CommandName);
+
+            base.EvaluateCore(args);
         }
 
         /// <summary>

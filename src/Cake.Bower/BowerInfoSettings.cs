@@ -26,6 +26,8 @@ namespace Cake.Bower
                 if (!string.IsNullOrWhiteSpace(Property))
                     args.Append(Property);
             }
+
+            base.EvaluateCore(args);
         }
 
         /// <summary>
