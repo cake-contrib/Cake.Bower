@@ -45,5 +45,27 @@ namespace Cake.Bower
         /// <param name="settings"></param>
         /// <returns></returns>
         IBowerRunnerCommands Cache(BowerCacheSettings settings);
+
+        /// <summary>
+        /// execute 'bower help'
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns></returns>
+        IBowerRunnerCommands Help(string command = null);
+
+        /// <summary>
+        /// execute 'bower home'
+        /// </summary>
+        /// <param name="package"></param>
+        /// <returns></returns>
+        IBowerRunnerCommands Home(string package = null);
+
+        /// <summary>
+        /// execute 'bower info'
+        /// </summary>
+        /// <param name="package"></param>
+        /// <param name="property"></param>
+        /// <returns></returns>
+        IBowerRunnerCommands Info(string package = null, string property = null);
     }
 }

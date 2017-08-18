@@ -61,6 +61,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BowerCacheFixture.cs" />
+    <Compile Include="BowerCacheTests.cs" />
+    <Compile Include="BowerHelpFixture.cs" />
+    <Compile Include="BowerHelpTests.cs" />
+    <Compile Include="BowerInfoFixture.cs" />
+    <Compile Include="BowerInfoTests.cs" />
     <Compile Include="BowerInstallFixture.cs" />
     <Compile Include="BowerInstallTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

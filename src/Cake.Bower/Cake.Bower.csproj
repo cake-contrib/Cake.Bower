@@ -46,6 +46,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BowerCacheSettings.cs" />
+    <Compile Include="BowerHelpSettings.cs" />
+    <Compile Include="BowerHomeSettings.cs" />
+    <Compile Include="BowerInfoSettings.cs" />
     <Compile Include="BowerInstallSettings.cs" />
     <Compile Include="BowerRunner.cs" />
     <Compile Include="BowerRunnerAliases.cs" />

@@ -9,7 +9,8 @@ namespace Cake.Bower
     /// <summary>
     /// A wrapper around the Bower package manager
     /// </summary>
-    public class BowerRunner : Tool<BowerRunnerSettings>, IBowerRunnerCommands{
+    public class BowerRunner : Tool<BowerRunnerSettings>, IBowerRunnerCommands
+    {
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BowerRunner" /> class.
@@ -32,7 +33,7 @@ namespace Cake.Bower
         /// Gets the name of the tool executable
         /// </summary>
         /// <returns>The tool executable name</returns>
-        protected override IEnumerable<string> GetToolExecutableNames() => new[] {"bower.cmd", "bower"};
+        protected override IEnumerable<string> GetToolExecutableNames() => new[] { "bower.cmd", "bower" };
 
         #region install
         /// <summary>
@@ -151,17 +152,15 @@ namespace Cake.Bower
         /// <summary>
         /// execute 'bower cache' for a particular package
         /// </summary>
-        /// <param name="configure">options when running 'bower install'</param>
+        /// <param name="configure">options when running 'bower cache'</param>
         /// <example>
-        /// <para>Run 'bower install'</para>
+        /// <para>Run 'bower cache'</para>
         /// <code>
         /// <![CDATA[
         /// Task("Bower")
         ///     .Does(() =>
         /// {
-        ///     var settings = new BowerInstallSettings();
-        ///     settings.WithSave();
-        ///     Bower.Install("jquery", settings));
+        ///     Bower.Cache(s => s.Clean()));
         /// });
         /// ]]>
         /// </code>
@@ -177,23 +176,102 @@ namespace Cake.Bower
         /// <summary>
         /// execute 'bower cache' for a particular package
         /// </summary>
-        /// <param name="settings">options when running 'bower install'</param>
+        /// <param name="settings">options when running 'bower cache'</param>
         /// <example>
-        /// <para>Run 'bower install'</para>
+        /// <para>Run 'bower cache'</para>
         /// <code>
         /// <![CDATA[
         /// Task("Bower")
         ///     .Does(() =>
         /// {
-        ///     var settings = new BowerInstallSettings();
-        ///     settings.WithSave();
-        ///     Bower.Install("jquery", settings));
+        ///     var settings = new BowerCacheSettings();
+        ///     settings.Clean();
+        ///     Bower.Install(settings));
         /// });
         /// ]]>
         /// </code>
         /// </example>
         public IBowerRunnerCommands Cache(BowerCacheSettings settings)
         {
+            var args = GetBowerSettingsArguments(settings);
+            Run(settings, args);
+            return this;
+        }
+        #endregion
+
+        #region help
+        /// <summary>
+        /// execute 'bower help' for a particular package
+        /// </summary>
+        /// <param name="command"></param>
+        /// <example>
+        /// <para>Run 'bower help'</para>
+        /// <code>
+        /// <![CDATA[
+        /// Task("Bower")
+        ///     .Does(() =>
+        /// {
+        ///     Bower.Help("install"));
+        /// });
+        /// ]]>
+        /// </code>
+        /// </example>
+        public IBowerRunnerCommands Help(string command)
+        {
+            var settings = new BowerHelpSettings(command);
+            var args = GetBowerSettingsArguments(settings);
+            Run(settings, args);
+            return this;
+        }
+        #endregion region
+
+        #region home
+        /// <summary>
+        /// execute 'bower home' for a particular package
+        /// </summary>
+        /// <param name="package"></param>
+        /// <example>
+        /// <para>Run 'bower home'</para>
+        /// <code>
+        /// <![CDATA[
+        /// Task("Bower")
+        ///     .Does(() =>
+        /// {
+        ///     Bower.Home("jquery"));
+        /// });
+        /// ]]>
+        /// </code>
+        /// </example>
+        public IBowerRunnerCommands Home(string package)
+        {
+            var settings = new BowerHomeSettings(package);
+            var args = GetBowerSettingsArguments(settings);
+            Run(settings, args);
+            return this;
+        }
+        #endregion
+
+        #region info
+        /// <summary>
+        /// execute 'bower info' for a particular package
+        /// </summary>
+        /// <param name="package"></param>
+        /// <example>
+        /// <para>Run 'bower info'</para>
+        /// <code>
+        /// <![CDATA[
+        /// Task("Bower")
+        ///     .Does(() =>
+        /// {
+        ///     Bower.Info("jquery", "main"));
+        /// });
+        /// ]]>
+        /// </code>
+        /// </example>
+        public IBowerRunnerCommands Info(string package = null, string property = null)
+        {
+            var settings = new BowerInfoSettings();
+            settings.ForPackage(package).ForProperty(property);
             var args = GetBowerSettingsArguments(settings);
             Run(settings, args);
             return this;
