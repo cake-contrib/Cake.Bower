@@ -3,10 +3,20 @@ using Cake.Core.IO;
 
 namespace Cake.Bower
 {
+    /// <summary>
+    /// Bower install settings
+    /// </summary>
     public class BowerInstallSettings : BowerRunnerSettings
     {
+        /// <summary>
+        /// Bower install settings
+        /// </summary>
         public BowerInstallSettings() : base("install") { }
 
+        /// <summary>
+        /// Evaluate options
+        /// </summary>
+        /// <param name="args"></param>
         protected override void EvaluateCore(ProcessArgumentBuilder args)
         {
             if (!string.IsNullOrWhiteSpace(Package))
@@ -23,6 +33,11 @@ namespace Cake.Bower
                 args.Append("--production");
         }
 
+        /// <summary>
+        /// Name of the package to use. See https://bower.io/docs/api/#install for details
+        /// </summary>
+        /// <param name="package"></param>
+        /// <returns></returns>
         public BowerInstallSettings WithPackage(string package)
         {
             Package = package;

@@ -4,6 +4,9 @@ using Cake.Core.Annotations;
 
 namespace Cake.Bower
 {
+    /// <summary>
+    /// Provides a wrapper around Bower functionality within a Cake build script
+    /// </summary>
     [CakeAliasCategory("Bower")]
     public static class BowerRunnerAliases
     {

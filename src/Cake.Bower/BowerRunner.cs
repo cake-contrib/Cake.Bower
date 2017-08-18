@@ -6,6 +6,9 @@ using Cake.Core.Tooling;
 
 namespace Cake.Bower
 {
+    /// <summary>
+    /// A wrapper around the Bower package manager
+    /// </summary>
     public class BowerRunner : Tool<BowerRunnerSettings>, IBowerRunnerCommands{
 
         /// <summary>
@@ -19,8 +22,16 @@ namespace Cake.Bower
             IToolLocator toolLocator)
             : base(fileSystem, environment, processRunner, toolLocator) { }
 
+        /// <summary>
+        /// Gets the name of the tool
+        /// </summary>
+        /// <returns>the name of the tool</returns>
         protected override string GetToolName() => "Bower Runner";
 
+        /// <summary>
+        /// Gets the name of the tool executable
+        /// </summary>
+        /// <returns>The tool executable name</returns>
         protected override IEnumerable<string> GetToolExecutableNames() => new[] {"bower.cmd", "bower"};
 
         #region install

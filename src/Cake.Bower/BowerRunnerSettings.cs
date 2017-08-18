@@ -5,10 +5,20 @@ using Cake.Core.Tooling;
 
 namespace Cake.Bower
 {
+    /// <summary>
+    /// Bower runner settings
+    /// </summary>
     public class BowerRunnerSettings : ToolSettings
     {
+        /// <summary>
+        /// The command to run
+        /// </summary>
         protected readonly string Command;
 
+        /// <summary>
+        /// Bower runner settings
+        /// </summary>
+        /// <param name="command"></param>
         public BowerRunnerSettings(string command)
         {
             if (string.IsNullOrWhiteSpace(command))
