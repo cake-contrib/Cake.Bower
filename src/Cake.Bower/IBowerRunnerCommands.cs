@@ -81,5 +81,16 @@ namespace Cake.Bower
         /// <param name="settings"></param>
         /// <returns></returns>
         IBowerRunnerCommands Info(BowerInfoSettings settings);
+
+        /// <summary>
+        /// execute 'bower link'
+        /// </summary>
+        /// <returns></returns>
+        IBowerRunnerCommands Link(Action<BowerLinkSettings> configure = null);
+        /// <summary>
+        /// execute 'bower link'
+        /// </summary>
+        /// <returns></returns>
+        IBowerRunnerCommands Link(BowerLinkSettings settings);
     }
 }

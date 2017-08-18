@@ -323,6 +323,57 @@ namespace Cake.Bower
         }
         #endregion
 
+        #region Link
+        /// <summary>
+        /// execute 'bower link' for a particular package
+        /// </summary>
+        /// <example>
+        /// <param name="configure"></param>
+        /// <para>Run 'bower link'</para>
+        /// <code>
+        /// <![CDATA[
+        /// Task("Bower")
+        ///     .Does(() =>
+        /// {
+        ///     Bower.Link(s => s.UseWorkingDirectory("./folder/").WithName("jquery");
+        /// });
+        /// ]]>
+        /// </code>
+        /// </example>
+        public IBowerRunnerCommands Link(Action<BowerLinkSettings> configure = null)
+        {
+            var settings = new BowerLinkSettings();
+            configure?.Invoke(settings);
+            return Link(settings);
+        }
+
+        /// <summary>
+        /// execute 'bower link' for a particular package
+        /// </summary>
+        /// <example>
+        /// <param name="settings"></param>
+        /// <para>Run 'bower link'</para>
+        /// <code>
+        /// <![CDATA[
+        /// Task("Bower")
+        ///     .Does(() =>
+        /// {
+        ///     var settings = new BowerLinkSettings().WithName("jquery");
+        ///     Bower.Link(settings);
+        /// });
+        /// ]]>
+        /// </code>
+        /// </example>
+        public IBowerRunnerCommands Link(BowerLinkSettings settings)
+        {
+            var args = GetBowerSettingsArguments(settings);
+            Run(settings, args);
+            return this;
+        }
+        #endregion
+
+
+
         private static ProcessArgumentBuilder GetBowerSettingsArguments(BowerRunnerSettings settings)
         {
             var args = new ProcessArgumentBuilder();

@@ -6,12 +6,7 @@ namespace Cake.Bower.Tests
     public class BowerCacheTests
     {
         private const string _packageTestName = "package-test-name";
-        private readonly BowerCacheFixture _fixture;
-
-        public BowerCacheTests()
-        {
-            _fixture = new BowerCacheFixture();
-        }
+        private readonly BowerCacheFixture _fixture = new BowerCacheFixture();
 
         [Fact]
         public void No_Install_Settings_Should_Use_Correct_Argument_Provided_In_BowerCacheSettings()
