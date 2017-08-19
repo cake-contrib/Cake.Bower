@@ -1,3 +1,4 @@
+#tool "GitVersion.CommandLine"
 #tool "xunit.runner.console"
 
 //////////////////////////////////////////////////////////////////////
@@ -19,9 +20,11 @@ var testResultsPath         = MakeAbsolute(Directory(artifacts + "./test-results
 var testAssemblies          = new List<FilePath> { 
                                 MakeAbsolute(File("./src/Cake.Bower.Tests/bin/" + configuration + "/Cake.Bower.Tests.dll"))
                               };
+var versionAssemblyInfo     = MakeAbsolute(File(Argument("versionAssemblyInfo", "VersionAssemblyInfo.cs")));
 
 SolutionParserResult solution        = null;
 SolutionProject project              = null;
+GitVersion versionInfo               = null;
 
 //////////////////////////////////////////////////////////////////////
 // TASKS
@@ -46,6 +49,34 @@ Task("Clean")
     CleanDirectories(objDirs);
 });
 
+Task("Update-Version-Info")
+    .IsDependentOn("Create-Version-Info")
+    .Does(() => 
+{
+        versionInfo = GitVersion(new GitVersionSettings {
+            UpdateAssemblyInfo = true,
+            UpdateAssemblyInfoFilePath = versionAssemblyInfo
+        });
+
+    if(versionInfo != null) {
+        Information("Version: {0}", versionInfo.FullSemVer);
+    } else {
+        throw new Exception("Unable to determine version");
+    }
+});
+
+Task("Create-Version-Info")
+    .WithCriteria(() => !FileExists(versionAssemblyInfo))
+    .Does(() =>
+{
+    Information("Creating version assembly info");
+    CreateAssemblyInfo(versionAssemblyInfo, new AssemblyInfoSettings {
+        Version = "0.0.0.0",
+        FileVersion = "0.0.0.0",
+        InformationalVersion = "",
+    });
+});
+
 Task("Restore-NuGet-Packages")
     .IsDependentOn("Clean")
     .Does(() =>
@@ -54,6 +85,7 @@ Task("Restore-NuGet-Packages")
 });
 
 Task("Build")
+    .IsDependentOn("Update-Version-Info")
     .IsDependentOn("Restore-NuGet-Packages")
     .Does(() =>
 {
@@ -109,6 +141,33 @@ Task("Run-Unit-Tests")
     
     XUnit2(testAssemblies, settings);
 });
+
+Task("AppVeyor-Update-Build-Number")
+    .IsDependentOn("Update-Version-Info")
+    .WithCriteria(() => AppVeyor.IsRunningOnAppVeyor)
+    .Does(() =>
+{
+    AppVeyor.UpdateBuildVersion(versionInfo.FullSemVer +"|" +AppVeyor.Environment.Build.Number);
+});
+
+Task("Appveyor-Upload-Artifacts")
+    .IsDependentOn("Package")
+    .WithCriteria(() => AppVeyor.IsRunningOnAppVeyor)
+    .Does(() =>
+{
+    foreach(var nupkg in GetFiles(artifacts +"/*.nupkg")) {
+        AppVeyor.UploadArtifact(nupkg);
+    }
+});
+
+Task("AppVeyor")
+    .WithCriteria(() => AppVeyor.IsRunningOnAppVeyor)
+    .IsDependentOn("AppVeyor-Update-Build-Number")
+    .IsDependentOn("AppVeyor-Upload-Artifacts");
+
+Task("CI")
+    .IsDependentOn("AppVeyor")
+    .IsDependentOn("Default");
 
 //////////////////////////////////////////////////////////////////////
 // TASK TARGETS

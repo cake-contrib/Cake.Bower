@@ -1,5 +1,7 @@
 # Cake.Bower
 
+[![NuGet](https://img.shields.io/nuget/v/Cake.Bower.svg)](https://www.nuget.org/packages/Cake.Bower/) [![Build status](https://ci.appveyor.com/api/projects/status/17x9uhlfja50wdk3?svg=true)](https://ci.appveyor.com/project/cakecontrib/cake-bower)
+
 ## Usage
 
 Build the Cake.Bower.dll then use as follows
@@ -23,8 +25,12 @@ Build the Cake.Bower.dll then use as follows
 ## Scope
 Cake.Bower currently supports the following bower commands:
 
-* ```bower install```
 * ```bower cache```
+* ```bower help```
+* ```bower home```
+* ```bower info```
+* ```bower install```
+* ```bower link```
 
 Bower is officially deprecated, however my current build workflow requires it so I created the plugin to support that workflow.
 Other commands will get added as and when I get time, but pull requests are welcome.

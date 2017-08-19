@@ -62,5 +62,8 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\VersionAssemblyInfo.cs" Link="VersionAssemblyInfo.cs" />
+  </ItemGroup>  
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
