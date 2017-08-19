@@ -261,5 +261,6 @@ __pycache__/
 *.pyc
 
 # CAKE
-tools/
+/tools/**/*
+!/tools/packages.config
 VersionAssemblyInfo.*
