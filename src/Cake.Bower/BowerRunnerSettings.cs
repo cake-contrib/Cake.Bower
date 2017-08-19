@@ -8,7 +8,7 @@ namespace Cake.Bower
     /// <summary>
     /// Bower runner settings
     /// </summary>
-    public class BowerRunnerSettings : ToolSettings
+    public abstract class BowerRunnerSettings : ToolSettings
     {
         /// <summary>
         /// The command to run

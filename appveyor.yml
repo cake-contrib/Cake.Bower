@@ -1,0 +1,22 @@
+version: '{build}'
+os: Visual Studio 2017
+init:
+- cmd: git config --global core.autocrlf true
+cache: 
+- packages -> src\**\packages.config
+- tools -> tools\packages.config
+build_script:
+- ps: .\build.ps1 -Target "CI" -Verbosity "Normal" -Configuration "Release"
+test: off
+deploy:
+- provider: NuGet
+  api_key:
+    secure: lJwRA1YJh/pBQrC7c+MxJu94KWPcRBUgyb7a/jyiouY4+NDIkxHY/3qgw1igWZNu
+  on:
+    branch: /release\/.+/
+- provider: NuGet
+  api_key:
+    secure: lJwRA1YJh/pBQrC7c+MxJu94KWPcRBUgyb7a/jyiouY4+NDIkxHY/3qgw1igWZNu
+  on:
+    branch: master
+    APPVEYOR_REPO_TAG: /.+/
