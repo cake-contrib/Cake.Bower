@@ -8,7 +8,8 @@ BuildParameters.SetParameters(context: Context,
                             title: "Cake.Bower",
                             repositoryOwner: "cake-contrib",
                             repositoryName: "Cake.Bower",
-                            appVeyorAccountName: "cakecontrib");
+                            appVeyorAccountName: "cakecontrib",
+                            shouldRunInspectCode: false);
 
 BuildParameters.PrintParameters(Context);
 
