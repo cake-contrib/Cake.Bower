@@ -2,19 +2,18 @@
 
 Environment.SetVariableNames();
 
-BuildParameters.SetParameters(context: Context, 
+BuildParameters.SetParameters(context: Context,
                             buildSystem: BuildSystem,
                             sourceDirectoryPath: "./",
                             title: "Cake.Bower",
                             repositoryOwner: "cake-contrib",
                             repositoryName: "Cake.Bower",
-                            appVeyorAccountName: "cakecontrib",
-                            shouldRunInspectCode: false);
+                            appVeyorAccountName: "cakecontrib");
 
 BuildParameters.PrintParameters(Context);
 
 ToolSettings.SetToolSettings(context: Context,
-                            dupFinderExcludePattern: new string[] { 
+                            dupFinderExcludePattern: new string[] {
                                 BuildParameters.RootDirectoryPath + "/src/Cake.Bower.Tests/*.cs" },
                             testCoverageFilter: "+[*]* -[xunit.*]* -[Cake.Core]* -[Cake.Testing]* -[*.Tests]* ",
                             testCoverageExcludeByAttribute: "*.ExcludeFromCodeCoverage*",

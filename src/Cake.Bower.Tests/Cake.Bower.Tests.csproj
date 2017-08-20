@@ -31,7 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Cake.Core, Version=0.21.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Cake.Core.0.21.1\lib\net45\Cake.Core.dll</HintPath>
+      <HintPath>..\..\packages\Cake.Core.0.21.1\lib\net45\Cake.Core.dll</HintPath>
     </Reference>
     <Reference Include="Cake.Testing, Version=0.21.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Cake.Testing.0.21.1\lib\net45\Cake.Testing.dll</HintPath>
