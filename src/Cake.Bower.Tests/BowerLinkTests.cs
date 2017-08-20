@@ -10,7 +10,7 @@ namespace Cake.Bower.Tests
         private readonly BowerLinkFixture fixture = new BowerLinkFixture();
 
         [Fact]
-        public void No_Install_Settings_Should_Use_Correct_Argument_Provided_In_BowerLinkSettings()
+        public void No_Link_Settings_Should_Use_Correct_Argument_Provided_In_BowerLinkSettings()
         {
             fixture.LinkSettings = null;
             var result = fixture.Run();

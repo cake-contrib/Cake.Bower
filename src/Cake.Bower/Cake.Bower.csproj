@@ -51,7 +51,11 @@
     <Compile Include="BowerInfoSettings.cs" />
     <Compile Include="BowerInstallSettings.cs" />
     <Compile Include="BowerLinkSettings.cs" />
+    <Compile Include="BowerListSettings.cs" />
+    <Compile Include="BowerLoginSettings.cs" />
     <Compile Include="BowerLogLevel.cs" />
+    <Compile Include="BowerOptions.cs" />
+    <Compile Include="BowerPruneSettings.cs" />
     <Compile Include="BowerRunner.cs" />
     <Compile Include="BowerRunnerAliases.cs" />
     <Compile Include="BowerRunnerSettings.cs" />
@@ -64,6 +68,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\SolutionInfo.cs" Link="SolutionInfo.cs" />
-  </ItemGroup>  
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

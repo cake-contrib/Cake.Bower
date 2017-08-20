@@ -17,7 +17,7 @@ namespace Cake.Bower
         /// Bower home settings
         /// </summary>
         /// <param name="package"></param>
-        public BowerHomeSettings(string package) : base("home")
+        public BowerHomeSettings(string package) : this()
         {
             ForPackage(package);
         }

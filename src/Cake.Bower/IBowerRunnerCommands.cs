@@ -92,5 +92,29 @@ namespace Cake.Bower
         /// </summary>
         /// <returns></returns>
         IBowerRunnerCommands Link(BowerLinkSettings settings);
+
+        /// <summary>
+        /// execute 'bower list'
+        /// </summary>
+        /// <returns></returns>
+        IBowerRunnerCommands List(Action<BowerListSettings> configure = null);
+        /// <summary>
+        /// execute 'bower list'
+        /// </summary>
+        /// <returns></returns>
+        IBowerRunnerCommands List(BowerListSettings settings);
+
+        /// <summary>
+        /// execute bower login
+        /// </summary>
+        /// <param name="token"></param>
+        /// <returns></returns>
+        IBowerRunnerCommands Login(string token = null);
+
+        /// <summary>
+        /// execute bower prune
+        /// </summary>
+        /// <returns></returns>
+        IBowerRunnerCommands Prune();
     }
 }

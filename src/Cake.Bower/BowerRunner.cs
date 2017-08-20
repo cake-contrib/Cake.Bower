@@ -64,10 +64,7 @@ namespace Cake.Bower
         /// </example>
         public IBowerRunnerCommands Install(Action<BowerInstallSettings> configure = null)
         {
-            var settings = new BowerInstallSettings();
-            configure?.Invoke(settings);
-
-            return Install(settings);
+            return Run(configure);
         }
 
 
@@ -92,9 +89,7 @@ namespace Cake.Bower
         /// </example>
         public IBowerRunnerCommands Install(BowerInstallSettings settings)
         {
-            var args = GetBowerSettingsArguments(settings);
-            Run(settings, args);
-            return this;
+            return Run(settings);
         }
 
         /// <summary>
@@ -119,7 +114,7 @@ namespace Cake.Bower
             var settings = new BowerInstallSettings();
             settings.WithPackage(package);
             configure?.Invoke(settings);
-            return Install(settings);
+            return Run(settings);
         }
 
         /// <summary>
@@ -144,7 +139,7 @@ namespace Cake.Bower
         public IBowerRunnerCommands Install(string package, BowerInstallSettings settings)
         {
             settings.WithPackage(package);
-            return Install(settings);
+            return Run(settings);
         }
         #endregion
 
@@ -167,10 +162,7 @@ namespace Cake.Bower
         /// </example>
         public IBowerRunnerCommands Cache(Action<BowerCacheSettings> configure = null)
         {
-            var settings = new BowerCacheSettings();
-            configure?.Invoke(settings);
-
-            return Cache(settings);
+            return Run(configure);
         }
 
         /// <summary>
@@ -193,9 +185,7 @@ namespace Cake.Bower
         /// </example>
         public IBowerRunnerCommands Cache(BowerCacheSettings settings)
         {
-            var args = GetBowerSettingsArguments(settings);
-            Run(settings, args);
-            return this;
+            return Run(settings);
         }
         #endregion
 
@@ -219,9 +209,7 @@ namespace Cake.Bower
         public IBowerRunnerCommands Help(string command)
         {
             var settings = new BowerHelpSettings(command);
-            var args = GetBowerSettingsArguments(settings);
-            Run(settings, args);
-            return this;
+            return Run(settings);
         }
         #endregion region
 
@@ -245,9 +233,7 @@ namespace Cake.Bower
         public IBowerRunnerCommands Home(string package)
         {
             var settings = new BowerHomeSettings(package);
-            var args = GetBowerSettingsArguments(settings);
-            Run(settings, args);
-            return this;
+            return Run(settings);
         }
         #endregion
 
@@ -293,9 +279,7 @@ namespace Cake.Bower
         /// </example>
         public IBowerRunnerCommands Info(Action<BowerInfoSettings> configure = null)
         {
-            var settings = new BowerInfoSettings();
-            configure?.Invoke(settings);
-            return Info(settings);
+            return Run(configure);
         }
 
         /// <summary>
@@ -317,15 +301,13 @@ namespace Cake.Bower
         /// </example>
         public IBowerRunnerCommands Info(BowerInfoSettings settings)
         {
-            var args = GetBowerSettingsArguments(settings);
-            Run(settings, args);
-            return this;
+            return Run(settings);
         }
         #endregion
 
         #region Link
         /// <summary>
-        /// execute 'bower link' for a particular package
+        /// execute 'bower link'
         /// </summary>
         /// <example>
         /// <param name="configure"></param>
@@ -342,13 +324,11 @@ namespace Cake.Bower
         /// </example>
         public IBowerRunnerCommands Link(Action<BowerLinkSettings> configure = null)
         {
-            var settings = new BowerLinkSettings();
-            configure?.Invoke(settings);
-            return Link(settings);
+            return Run(configure);
         }
 
         /// <summary>
-        /// execute 'bower link' for a particular package
+        /// execute 'bower link'
         /// </summary>
         /// <example>
         /// <param name="settings"></param>
@@ -366,19 +346,132 @@ namespace Cake.Bower
         /// </example>
         public IBowerRunnerCommands Link(BowerLinkSettings settings)
         {
-            var args = GetBowerSettingsArguments(settings);
-            Run(settings, args);
-            return this;
+            return Run(settings);
         }
         #endregion
 
+        #region list
+        /// <summary>
+        /// execute 'bower list'
+        /// </summary>
+        /// <example>
+        /// <param name="configure"></param>
+        /// <para>Run 'bower list'</para>
+        /// <code>
+        /// <![CDATA[
+        /// Task("Bower")
+        ///     .Does(() =>
+        /// {
+        ///     Bower.List(s => s.WithPaths());
+        /// });
+        /// ]]>
+        /// </code>
+        /// </example>
+        public IBowerRunnerCommands List(Action<BowerListSettings> configure = null)
+        {
+            return Run(configure);
+        }
 
+        /// <summary>
+        /// execute 'bower list'
+        /// </summary>
+        /// <example>
+        /// <param name="settings"></param>
+        /// <para>Run 'bower list'</para>
+        /// <code>
+        /// <![CDATA[
+        /// Task("Bower")
+        ///     .Does(() =>
+        /// {
+        ///     var settings = new BowerListSettings().WithPaths();
+        ///     Bower.List(settings);
+        /// });
+        /// ]]>
+        /// </code>
+        /// </example>
+        public IBowerRunnerCommands List(BowerListSettings settings)
+        {
+            return Run(settings);
+        }
+        #endregion
+
+        #region login
+        /// <summary>
+        /// execute 'bower login'
+        /// </summary>
+        /// <example>
+        /// <param name="token"></param>
+        /// <para>Run 'bower login'</para>
+        /// <code>
+        /// <![CDATA[
+        /// Task("Bower")
+        ///     .Does(() =>
+        /// {
+        ///     Bower.Login("a2eb43af648042a1b376d296dda551d4");
+        /// });
+        /// ]]>
+        /// </code>
+        /// </example>
+        public IBowerRunnerCommands Login(string token = null)
+        {
+            var settings = new BowerLoginSettings(token);
+            return Run(settings);
+        }
+        #endregion
+
+        #region prune
+        /// <summary>
+        /// execute 'bower prune'
+        /// </summary>
+        /// <example>
+        /// <para>Run 'bower prune'</para>
+        /// <code>
+        /// <![CDATA[
+        /// Task("Bower")
+        ///     .Does(() =>
+        /// {
+        ///     Bower.Prune();
+        /// });
+        /// ]]>
+        /// </code>
+        /// </example>
+        public IBowerRunnerCommands Prune()
+        {
+            return Run<BowerPruneSettings>();
+        }
+        #endregion
 
         private static ProcessArgumentBuilder GetBowerSettingsArguments(BowerRunnerSettings settings)
         {
             var args = new ProcessArgumentBuilder();
             settings?.Evaluate(args);
             return args;
+        }
+
+        /// <summary>
+        /// Generic runner using settings configurator
+        /// </summary>
+        /// <typeparam name="TSettings"></typeparam>
+        /// <param name="configure"></param>
+        /// <returns></returns>
+        private IBowerRunnerCommands Run<TSettings>(Action<TSettings> configure = null) where TSettings : BowerRunnerSettings
+        {
+            var settings = (TSettings)Activator.CreateInstance(typeof(TSettings));
+            configure?.Invoke(settings);
+            return Run(settings);
+        }
+
+        /// <summary>
+        /// Generic runner using settings
+        /// </summary>
+        /// <typeparam name="TSettings"></typeparam>
+        /// <param name="settings"></param>
+        /// <returns></returns>
+        private IBowerRunnerCommands Run<TSettings>(TSettings settings) where TSettings : BowerRunnerSettings
+        {
+            var args = GetBowerSettingsArguments(settings);
+            Run(settings, args);
+            return this;
         }
     }
 }
