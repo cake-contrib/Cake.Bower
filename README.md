@@ -20,7 +20,7 @@ Dev | [![Build status](https://ci.appveyor.com/api/projects/status/17x9uhlfja50w
 Build the Cake.Bower.dll then use as follows
 
 ```c#
-    #reference "bin/Cake.Bower.dll"
+    #addin "Cake.Bower"
 
     Task("Bower")
         .Does(() => {
@@ -44,6 +44,9 @@ Cake.Bower currently supports the following bower commands:
 * ```bower info```
 * ```bower install```
 * ```bower link```
+* ```bower list```
+* ```bower login```
+* ```bower prune```
 
 Bower is officially deprecated, however my current build workflow requires it so I created the plugin to support that workflow.
 Other commands will get added as and when I get time, but pull requests are welcome.
