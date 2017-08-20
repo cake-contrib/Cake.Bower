@@ -5,15 +5,15 @@ namespace Cake.Bower.Tests
 {
     public class BowerCacheTests
     {
-        private const string _packageTestName = "package-test-name";
-        private readonly BowerCacheFixture _fixture = new BowerCacheFixture();
+        private const string PackageTestName = "package-test-name";
+        private readonly BowerCacheFixture fixture = new BowerCacheFixture();
 
         [Fact]
         public void No_Install_Settings_Should_Use_Correct_Argument_Provided_In_BowerCacheSettings()
         {
-            _fixture.CacheSettings = null;
+            fixture.CacheSettings = null;
 
-            var result = _fixture.Run();
+            var result = fixture.Run();
 
             result.Args.ShouldBe("cache");
         }
@@ -21,9 +21,9 @@ namespace Cake.Bower.Tests
         [Fact]
         public void Clean_Should_Use_Correct_Argument_Provided_In_BowerCacheSettings()
         {
-            _fixture.CacheSettings = s => s.Clean();
+            fixture.CacheSettings = s => s.Clean();
 
-            var result = _fixture.Run();
+            var result = fixture.Run();
 
             result.Args.ShouldBe("cache clean");
         }
@@ -31,9 +31,9 @@ namespace Cake.Bower.Tests
         [Fact]
         public void List_Should_Use_Correct_Argument_Provided_In_BowerCacheSettings()
         {
-            _fixture.CacheSettings = s => s.List();
+            fixture.CacheSettings = s => s.List();
 
-            var result = _fixture.Run();
+            var result = fixture.Run();
 
             result.Args.ShouldBe("cache list");
         }
@@ -41,29 +41,29 @@ namespace Cake.Bower.Tests
         [Fact]
         public void Clean_With_Package_Should_Use_Correct_Arguments_Provided_In_BowerCacheSettings()
         {
-            _fixture.CacheSettings = s => s.Clean().WithPackage(_packageTestName);
+            fixture.CacheSettings = s => s.Clean().WithPackage(PackageTestName);
 
-            var result = _fixture.Run();
+            var result = fixture.Run();
 
-            result.Args.ShouldBe($"cache clean {_packageTestName}");
+            result.Args.ShouldBe($"cache clean {PackageTestName}");
         }
 
         [Fact]
         public void List_With_Package_Should_Use_Correct_Arguments_Provided_In_BowerCacheSettings()
         {
-            _fixture.CacheSettings = s => s.List().WithPackage(_packageTestName);
+            fixture.CacheSettings = s => s.List().WithPackage(PackageTestName);
 
-            var result = _fixture.Run();
+            var result = fixture.Run();
 
-            result.Args.ShouldBe($"cache list {_packageTestName}");
+            result.Args.ShouldBe($"cache list {PackageTestName}");
         }
 
         [Fact]
         public void No_SubCommand_With_Package_Should_Use_Ignore_Package_In_BowerCacheSettings()
         {
-            _fixture.CacheSettings = s => s.WithPackage(_packageTestName);
+            fixture.CacheSettings = s => s.WithPackage(PackageTestName);
 
-            var result = _fixture.Run();
+            var result = fixture.Run();
 
             result.Args.ShouldBe("cache");
         }

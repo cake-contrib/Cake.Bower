@@ -5,31 +5,31 @@ namespace Cake.Bower.Tests
 {
     public class BowerInfoTests
     {
-        private const string _testPackageName = "test-package-name";
-        private const string _testPropertyName = "test-property-name";
-        private readonly BowerInfoFixture _fixture;
+        private const string TestPackageName = "test-package-name";
+        private const string TestPropertyName = "test-property-name";
+        private readonly BowerInfoFixture fixture;
 
         public BowerInfoTests()
         {
-            _fixture = new BowerInfoFixture();
+            fixture = new BowerInfoFixture();
         }
 
         [Fact]
         public void ForPackage_Should_Use_Correct_Argument_Provided_In_BowerInfoSettings()
         {
-            _fixture.InfoSettings = s => s.ForPackage(_testPackageName);
+            fixture.InfoSettings = s => s.ForPackage(TestPackageName);
 
-            var result = _fixture.Run();
+            var result = fixture.Run();
 
-            result.Args.ShouldBe($"info {_testPackageName}");
+            result.Args.ShouldBe($"info {TestPackageName}");
         }
 
         [Fact]
         public void ForProperty_Only_Should_Ignore_Settings_Correct_Argument_Provided_In_BowerInfoSettings()
         {
-            _fixture.InfoSettings = s => s.ForProperty(_testPropertyName);
+            fixture.InfoSettings = s => s.ForProperty(TestPropertyName);
 
-            var result = _fixture.Run();
+            var result = fixture.Run();
 
             result.Args.ShouldBe("info");
         }
@@ -37,11 +37,11 @@ namespace Cake.Bower.Tests
         [Fact]
         public void ForProperty_And_ForPackage_Should_Use_Correct_Argument_Provided_In_BowerInfoSettings()
         {
-            _fixture.InfoSettings = s => s.ForProperty(_testPropertyName).ForPackage(_testPackageName);
+            fixture.InfoSettings = s => s.ForProperty(TestPropertyName).ForPackage(TestPackageName);
 
-            var result = _fixture.Run();
+            var result = fixture.Run();
 
-            result.Args.ShouldBe($"info {_testPackageName} {_testPropertyName}");
+            result.Args.ShouldBe($"info {TestPackageName} {TestPropertyName}");
         }
     }
 }

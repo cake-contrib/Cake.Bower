@@ -1,6 +1,19 @@
 # Cake.Bower
 
-[![NuGet](https://img.shields.io/nuget/v/Cake.Bower.svg)](https://www.nuget.org/packages/Cake.Bower/) [![Build status](https://ci.appveyor.com/api/projects/status/17x9uhlfja50wdk3?svg=true)](https://ci.appveyor.com/project/cakecontrib/cake-bower)
+## Information
+
+### Build Status
+
+Branch | Status
+--- | ---
+Master | [![Build status](https://ci.appveyor.com/api/projects/status/17x9uhlfja50wdk3?svg=true)](https://ci.appveyor.com/project/cakecontrib/cake-bower/branch/master)
+Dev | [![Build status](https://ci.appveyor.com/api/projects/status/17x9uhlfja50wdk3?svg=true)](https://ci.appveyor.com/project/cakecontrib/cake-bower/branch/dev)
+
+### Nuget
+[![NuGet](https://img.shields.io/nuget/v/Cake.Bower.svg)](https://www.nuget.org/packages/Cake.Bower/) 
+
+### Licence
+[![License](http://img.shields.io/:license-mit-blue.svg)](http://cake-contrib.mit-license.org)
 
 ## Usage
 

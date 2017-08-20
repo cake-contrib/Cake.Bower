@@ -1,5 +1,4 @@
-﻿using System;
-using Cake.Testing.Fixtures;
+﻿using Cake.Testing.Fixtures;
 
 namespace Cake.Bower.Tests
 {

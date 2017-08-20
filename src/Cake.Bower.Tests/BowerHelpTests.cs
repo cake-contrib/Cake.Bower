@@ -5,20 +5,20 @@ namespace Cake.Bower.Tests
 {
     public class BowerHelpTests
     {
-        private const string _testCommandName = "test-command-name";
-        private readonly BowerHelpFixture _fixture;
+        private const string TestCommandName = "test-command-name";
+        private readonly BowerHelpFixture fixture;
 
         public BowerHelpTests()
         {
-            _fixture = new BowerHelpFixture();
+            fixture = new BowerHelpFixture();
         }
 
         [Fact]
         public void No_Help_Settings_Should_Use_Correct_Argument_Provided_In_BowerHelpSettings()
         {
-            _fixture.Command = null;
+            fixture.Command = null;
 
-            var result = _fixture.Run();
+            var result = fixture.Run();
 
             result.Args.ShouldBe("help");
         }
@@ -26,11 +26,11 @@ namespace Cake.Bower.Tests
         [Fact]
         public void For_Command_Settings_Should_Use_Correct_Argument_Provided_In_BowerHelpSettings()
         {
-            _fixture.Command = _testCommandName;
+            fixture.Command = TestCommandName;
 
-            var result = _fixture.Run();
+            var result = fixture.Run();
 
-            result.Args.ShouldBe($"help {_testCommandName}");
+            result.Args.ShouldBe($"help {TestCommandName}");
         }
     }
 }
