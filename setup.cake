@@ -1,10 +1,11 @@
 #load nuget:https://www.myget.org/F/cake-contrib/api/v2?package=Cake.Recipe&prerelease
+#load "docs-prep.cake"
 
 Environment.SetVariableNames();
 
 BuildParameters.SetParameters(context: Context,
                             buildSystem: BuildSystem,
-                            sourceDirectoryPath: "./",
+                            sourceDirectoryPath: "./src",
                             title: "Cake.Bower",
                             repositoryOwner: "cake-contrib",
                             repositoryName: "Cake.Bower",

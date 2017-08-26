@@ -24,7 +24,7 @@ Build the Cake.Bower.dll then use as follows
 
     Task("Bower")
         .Does(() => {
-            // bower install
+            // bower install using bower.json
             Bower.Install();
 
             // bower install package and save

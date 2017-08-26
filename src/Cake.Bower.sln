@@ -3,16 +3,18 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26730.3
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{AB654C5C-F9E9-4033-9CBA-20EDDC89166D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cake.Bower", "Cake.Bower\Cake.Bower.csproj", "{786C186A-82E7-451C-BBE0-D6050592A6E2}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{23EE30D2-7270-4320-BE03-AF41E4B5AD20}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cake.Bower.Tests", "Cake.Bower.Tests\Cake.Bower.Tests.csproj", "{8B66FAA7-F0F3-48D0-9002-3C4A3C72148E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6D856934-9F8C-49E5-B223-A3F1E5DEFEA0}"
 	ProjectSection(SolutionItems) = preProject
-		README.md = README.md
+		..\.gitignore = ..\.gitignore
+		..\LICENSE = ..\LICENSE
+		..\README.md = ..\README.md
+		..\setup.cake = ..\setup.cake
+		..\SolutionInfo.cs = ..\SolutionInfo.cs
 	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cake.Bower", "src\Cake.Bower\Cake.Bower.csproj", "{786C186A-82E7-451C-BBE0-D6050592A6E2}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cake.Bower.Tests", "src\Cake.Bower.Tests\Cake.Bower.Tests.csproj", "{8B66FAA7-F0F3-48D0-9002-3C4A3C72148E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,10 +33,6 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{786C186A-82E7-451C-BBE0-D6050592A6E2} = {AB654C5C-F9E9-4033-9CBA-20EDDC89166D}
-		{8B66FAA7-F0F3-48D0-9002-3C4A3C72148E} = {AB654C5C-F9E9-4033-9CBA-20EDDC89166D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EEA38717-53A3-42B4-B6AD-A7F3843E38A9}
