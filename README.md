@@ -7,7 +7,7 @@
 Branch | Status
 --- | ---
 Master | [![Build status](https://ci.appveyor.com/api/projects/status/17x9uhlfja50wdk3/branch/master?svg=true)](https://ci.appveyor.com/project/cakecontrib/cake-bower/branch/master)
-Dev | [![Build status](https://ci.appveyor.com/api/projects/status/17x9uhlfja50wdk3/branch/dev?svg=true)](https://ci.appveyor.com/project/cakecontrib/cake-bower/branch/dev)
+Develop | [![Build status](https://ci.appveyor.com/api/projects/status/17x9uhlfja50wdk3/branch/develop?svg=true)](https://ci.appveyor.com/project/cakecontrib/cake-bower/branch/develop)
 
 ### Nuget
 [![NuGet](https://img.shields.io/nuget/v/Cake.Bower.svg)](https://www.nuget.org/packages/Cake.Bower/) 
