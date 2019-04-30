@@ -1,5 +1,5 @@
-<?xml version="1.0"?>
-<package >
+<?xml version="1.0" encoding="utf-8"?>
+<package>
   <metadata>
     <id>Cake.Bower</id>
     <title>Cake.Bower</title>
@@ -7,7 +7,7 @@
     <owners>Warren Bates, cake-contrib</owners>
     <licenseUrl>https://github.com/cake-contrib/Cake.Bower/blob/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/cake-contrib/Cake.Bower</projectUrl>
-    <iconUrl>https://cdn.rawgit.com/cake-contrib/graphics/a5cf0f881c390650144b2243ae551d5b9f836196/png/cake-contrib-medium.png</iconUrl>
+    <iconUrl>https://cdn.jsdelivr.net/gh/cake-contrib/graphics/png/cake-contrib-medium.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <summary>Adds Bower aliases for Cake</summary>
     <description>A set of aliases for Cake to help with running Bower scripts as part of a build</description>
