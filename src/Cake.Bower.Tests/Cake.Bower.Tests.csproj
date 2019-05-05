@@ -2,8 +2,7 @@
 
   <PropertyGroup>
     <!-- dotnet test is unable to run unit tests for .NET 4.6.1 currently -->
-    <TargetFrameworks Condition="'$(OS)' != 'Unix'">netcoreapp2.0;net461</TargetFrameworks>
-    <TargetFrameworks Condition="'$(OS)' == 'Unix'">netcoreapp2.0</TargetFrameworks>
+    <TargetFrameworks>netcoreapp2.0</TargetFrameworks>
 
     <IsPackable>false</IsPackable>
   </PropertyGroup>
