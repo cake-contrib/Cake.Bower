@@ -25,4 +25,4 @@ branches:
 #---------------------------------#
 cache:
 - Source\packages -> src\**\packages.config
-- Tools -> setup.cake
+- Tools -> recipe.cake
