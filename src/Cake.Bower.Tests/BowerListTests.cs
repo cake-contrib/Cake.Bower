@@ -23,6 +23,7 @@ namespace Cake.Bower.Tests
             result.Args.ShouldBe($"list {BowerOptions.List.Paths}");
         }
 
+        [Fact]
         public void WithRelative_Should_Use_Correct_Argument_Provided_In_BowerLinkSettings()
         {
             fixture.ListSettings = s => s.WithRelative();

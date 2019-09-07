@@ -37,6 +37,7 @@ namespace Cake.Bower.Tests
             result.Args.ShouldBe($"cache --loglevel={name}");
         }
 
+        [Fact]
         public void None_LogLevel_Setting_Does_Not_Add_Switch_To_Command()
         {
             fixture.CacheSettings = s => s.WithLogLevel(BowerLogLevel.None);
