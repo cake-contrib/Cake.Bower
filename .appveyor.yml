@@ -1,13 +1,30 @@
 #---------------------------------#
+#  Build Image                    #
+#---------------------------------#
+image: Visual Studio 2017
+
+#---------------------------------#
 #  Build Script                   #
 #---------------------------------#
 build_script:
   - ps: .\build.ps1 -Target AppVeyor
 
+#---------------------------------#
 # Tests
+#---------------------------------#
 test: off
 
-image: Visual Studio 2017
+#---------------------------------#
+#  Pull Requests                  #
+#---------------------------------#
+pull_requests:
+  do_not_increment_build_number: true
+
+#---------------------------------#
+#  General                        #
+#---------------------------------#
+skip_branch_with_pr: true
+
 #---------------------------------#
 #        Branches to build        #
 #---------------------------------#
@@ -15,14 +32,19 @@ branches:
   # Whitelist
   only:
     - develop
-    - dev
     - master
-    - /release/.*/
-    - /hotfix/.*/
+    - /release\/.*/
+    - /hotfix\/.*/
 
 #---------------------------------#
 #  Build Cache                    #
 #---------------------------------#
 cache:
-- Source\packages -> src\**\packages.config
-- Tools -> setup.cake
+- tools -> recipe.cake, tools/packages.config
+
+#---------------------------------#
+#  Skip builds for doc changes    #
+#---------------------------------#
+skip_commits:
+  # Regex for matching commit message
+  message: /\(doc\).*/
